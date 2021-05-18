@@ -33,7 +33,7 @@ public class ProizvodjacRestController {
 	@Autowired 
 	private ProizvodjacRepository proizvodjacRepository;
 	
-	@GetMapping("proizvodjaci")
+	@GetMapping("proizvodjac")
 	@ApiOperation(value = "Vraća kolekciju svih proizvođača iz baze podataka.")
 	public Collection<Proizvodjac> getProizvodjaci() {
 		return proizvodjacRepository.findAll();
@@ -51,7 +51,7 @@ public class ProizvodjacRestController {
 		return proizvodjacRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
-	@PostMapping("proizvodjaci")
+	@PostMapping("proizvodjac")
 	@ApiOperation(value = "Dodaje novog proizvođača u bazu podataka.")
 	public ResponseEntity<Proizvodjac> insertProizvodjac(@RequestBody Proizvodjac proizvodjac) {
 		if(!proizvodjacRepository.existsById(proizvodjac.getId())) {
@@ -61,7 +61,7 @@ public class ProizvodjacRestController {
 		return new ResponseEntity<Proizvodjac>(HttpStatus.CONFLICT);
 	}
 	
-	@PutMapping("proizvodjaci")
+	@PutMapping("proizvodjac")
 	@ApiOperation(value = "Update-uje postojećeg proizvođača.")
 	public ResponseEntity<Proizvodjac> updateProizvodjac(@RequestBody Proizvodjac proizvodjac) {
 		if(!proizvodjacRepository.existsById(proizvodjac.getId())) {
