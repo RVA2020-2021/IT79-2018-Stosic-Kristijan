@@ -78,8 +78,8 @@ public class ProizvodjacRestController {
 		if(!proizvodjacRepository.existsById(id)) {
 			return new ResponseEntity<Proizvodjac>(HttpStatus.NO_CONTENT);
 		}
+		jdbcTemplate.execute("delete from stavka_racuna where proizvod in (select id from proizvod where proizvodjac = " +id+ ")");
 		jdbcTemplate.execute("delete from proizvod where proizvodjac = " + id);
-		//  jdbcTemplate.execute("delete from stavka_racuna where proizvod = " + id);
 		proizvodjacRepository.deleteById(id); 
 		proizvodjacRepository.flush();
 		if(id == -100) {
