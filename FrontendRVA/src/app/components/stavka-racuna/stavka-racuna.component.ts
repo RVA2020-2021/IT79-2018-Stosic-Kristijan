@@ -1,4 +1,4 @@
-import { Input, OnChanges, ViewChild } from '@angular/core';
+import { Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -14,12 +14,13 @@ import { StavkaRacunaDialogComponent } from '../dialogs/stavka-racuna-dialog/sta
   templateUrl: './stavka-racuna.component.html',
   styleUrls: ['./stavka-racuna.component.css']
 })
-export class StavkaRacunaComponent implements OnInit, OnChanges {
+export class StavkaRacunaComponent implements OnInit, OnChanges, OnDestroy {
 
   displayedColumns = ['id', 'redniBroj', 'kolicina', 'jedinicaMere', 'cena', 'racun', 'proizvod', 'actions']
   dataSource: MatTableDataSource<StavkaRacuna>;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  stavkaRacunaSubscription: Subscription;
 
   @Input() selektovaniRacun: Racun;
 
@@ -36,9 +37,13 @@ export class StavkaRacunaComponent implements OnInit, OnChanges {
       this.loadData();
     }
   }
+  
+  ngOnDestroy(): void {
+    this.stavkaRacunaSubscription.unsubscribe();
+  }
 
   public loadData() {
-    this.stavkaRacunaService.getStavkeZaRacun(this.selektovaniRacun.id)
+    this.stavkaRacunaSubscription = this.stavkaRacunaService.getStavkeZaRacun(this.selektovaniRacun.id)
     .subscribe(data => {
       //console.log('dobijene stavke')
       //console.log(data)
