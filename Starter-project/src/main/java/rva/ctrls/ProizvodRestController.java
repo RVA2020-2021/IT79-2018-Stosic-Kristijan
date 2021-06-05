@@ -34,7 +34,7 @@ public class ProizvodRestController {
 	private ProizvodRepository proizvodRepository;
 	
 	
-	@GetMapping("proizvodi")
+	@GetMapping("proizvod")
 	@ApiOperation(value = "Vraća kolekciju svih proizvoda iz baze podataka.")
 	public Collection<Proizvod> getProizvodi() {
 		return proizvodRepository.findAll();
@@ -56,7 +56,7 @@ public class ProizvodRestController {
 			 * Mozemo vratiti i statuscode i da li je zahtev uspesno izvrsen
 			 * 
 			 *  *  */
-	@PostMapping("proizvodi")	
+	@PostMapping("proizvod")	
 	@ApiOperation(value = "Dodaje novi proizvod u bazu podataka.")
 	public ResponseEntity<Proizvod> insertProizvod(@RequestBody Proizvod proizvod) {
 		if(!proizvodRepository.existsById(proizvod.getId())) {
@@ -67,7 +67,7 @@ public class ProizvodRestController {
 	}
 	
 	
-	@PutMapping("proizvodi")
+	@PutMapping("proizvod")
 	@ApiOperation(value = "Update-uje postojeći proizvod.")
 	public ResponseEntity<Proizvod> updateProizvod(@RequestBody Proizvod proizvod) {
 		if(!proizvodRepository.existsById(proizvod.getId())) {
