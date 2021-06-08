@@ -39,6 +39,10 @@ export class StavkaRacunaComponent implements OnInit, OnChanges, OnDestroy {
       this.loadData();
     }
   }
+  
+  ngOnDestroy(): void {
+    this.stavkaRacunaSubscription.unsubscribe();
+  }
 
   ngOnDestroy(): void {
     this.stavkaRacunaSubscription.unsubscribe();
