@@ -29,7 +29,7 @@ public class Swagger {
 	
 	
 	public static final Contact DEFAULT_CONTACT = new Contact(
-            "Kristijan Stošić", 
+            "Kristijan Stosic", 
             "https://github.com/RVA2020-2021/IT79-2018-Stosic-Kristijan",
             "stosic@uns.ac.rs"
     );
